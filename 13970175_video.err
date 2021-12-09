@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "train.py", line 5, in <module>
+    from models import ResearchModels
+  File "/project2/nicho/weiliang/videoNet/code/models.py", line 12, in <module>
+    from locallyConnected3D import *
+  File "/project2/nicho/weiliang/videoNet/code/locallyConnected3D.py", line 3, in <module>
+    from keras.legacy import interfaces
+ModuleNotFoundError: No module named 'keras'

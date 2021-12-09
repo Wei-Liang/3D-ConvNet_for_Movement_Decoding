@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "neural_main.py", line 54, in <module>
+    load_to_memory=load_to_memory, batch_size=batch_size, nb_epoch=nb_epoch)
+  File "/project2/nicho/weiliang/videoNet/code/train.py", line 64, in train
+    lfp_start_ms,lfp_end_ms,vel_start_ms,vel_end_ms,lfp_ms_for_vel,)
+  File "/project2/nicho/weiliang/videoNet/code/video_supportive.py", line 101, in readAndDivideData
+    print(tps_oneHot.shape)
+AttributeError: 'NoneType' object has no attribute 'shape'

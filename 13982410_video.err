@@ -1,0 +1,15 @@
+Traceback (most recent call last):
+  File "neural_main.py", line 44, in <module>
+    load_to_memory=load_to_memory, batch_size=batch_size, nb_epoch=nb_epoch)
+  File "/project2/nicho/weiliang/videoNet/code/train.py", line 62, in train
+    sessions,monkey,array,seed,lfp_start_ms,lfp_end_ms)
+  File "/project2/nicho/weiliang/videoNet/code/video_supportive.py", line 31, in readAndDivideData
+    f = h5py.File(filepath,'r')
+  File "/software/python-anaconda-2020.02-el7-x86_64/envs/tf-gpu-2.1-cuda-10.1/lib/python3.7/site-packages/h5py/_hl/files.py", line 408, in __init__
+    swmr=swmr)
+  File "/software/python-anaconda-2020.02-el7-x86_64/envs/tf-gpu-2.1-cuda-10.1/lib/python3.7/site-packages/h5py/_hl/files.py", line 173, in make_fid
+    fid = h5f.open(name, flags, fapl=fapl)
+  File "h5py/_objects.pyx", line 54, in h5py._objects.with_phil.wrapper
+  File "h5py/_objects.pyx", line 55, in h5py._objects.with_phil.wrapper
+  File "h5py/h5f.pyx", line 88, in h5py.h5f.open
+OSError: Unable to open file (file signature not found)

@@ -1,0 +1,18 @@
+2021-10-28 21:28:12.035157: W tensorflow/stream_executor/platform/default/dso_loader.cc:55] Could not load dynamic library 'libcuda.so.1'; dlerror: libcuda.so.1: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /software/cuda-10.1-el7-x86_64/extras/CUPTI/lib64:/software/cuda-10.1-el7-x86_64/lib64:/software/slurm-current-el7-x86_64/lib64:/software/slurm-current-el7-x86_64/lib:/software/python-anaconda-2020.02-el7-x86_64/lib:/software/git-2.10-el7-x86_64/lib64:/software/subversion-1.9.4-el7-x86_64/lib:/software/serf-1.3.9-el7-x86_64/lib
+2021-10-28 21:28:12.035517: E tensorflow/stream_executor/cuda/cuda_driver.cc:351] failed call to cuInit: UNKNOWN ERROR (303)
+2021-10-28 21:28:12.035608: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:156] kernel driver does not appear to be running on this host (dali008.rcc.local): /proc/driver/nvidia/version does not exist
+2021-10-28 21:28:12.057238: I tensorflow/core/platform/cpu_feature_guard.cc:142] Your CPU supports instructions that this TensorFlow binary was not compiled to use: SSE4.1 SSE4.2 AVX AVX2 AVX512F FMA
+2021-10-28 21:28:12.309975: I tensorflow/core/platform/profile_utils/cpu_utils.cc:94] CPU Frequency: 2400000000 Hz
+2021-10-28 21:28:12.314489: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x5591a3f7d900 initialized for platform Host (this does not guarantee that XLA will be used). Devices:
+2021-10-28 21:28:12.314592: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (0): Host, Default Version
+2021-10-28 21:28:27.831711: I tensorflow/core/profiler/lib/profiler_session.cc:225] Profiler session started.
+2021-10-28 21:28:27.928486: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcupti.so.10.1
+2021-10-28 21:28:28.030395: E tensorflow/core/profiler/internal/gpu/cupti_tracer.cc:1307] function cupti_interface_->Subscribe( &subscriber_, (CUpti_CallbackFunc)ApiCallback, this)failed with error CUPTI_ERROR_NOT_INITIALIZED
+2021-10-28 21:28:28.031532: E tensorflow/core/profiler/internal/gpu/cupti_tracer.cc:1355] function cupti_interface_->ActivityEnable(activity)failed with error CUPTI_ERROR_NOT_INITIALIZED
+2021-10-28 21:28:36.763159: E tensorflow/core/profiler/internal/gpu/cupti_tracer.cc:1329] function cupti_interface_->EnableCallback( 0 , subscriber_, CUPTI_CB_DOMAIN_DRIVER_API, cbid)failed with error CUPTI_ERROR_INVALID_PARAMETER
+2021-10-28 21:28:36.763340: I tensorflow/core/profiler/internal/gpu/device_tracer.cc:88]  GpuTracer has collected 0 callback api events and 0 activity events.
+2021-10-29 06:23:55.718210: I tensorflow/core/profiler/lib/profiler_session.cc:225] Profiler session started.
+2021-10-29 06:23:55.720229: E tensorflow/core/profiler/internal/gpu/cupti_tracer.cc:1307] function cupti_interface_->Subscribe( &subscriber_, (CUpti_CallbackFunc)ApiCallback, this)failed with error CUPTI_ERROR_NOT_INITIALIZED
+2021-10-29 06:23:55.720808: E tensorflow/core/profiler/internal/gpu/cupti_tracer.cc:1355] function cupti_interface_->ActivityEnable(activity)failed with error CUPTI_ERROR_NOT_INITIALIZED
+2021-10-29 06:24:04.268298: E tensorflow/core/profiler/internal/gpu/cupti_tracer.cc:1329] function cupti_interface_->EnableCallback( 0 , subscriber_, CUPTI_CB_DOMAIN_DRIVER_API, cbid)failed with error CUPTI_ERROR_INVALID_PARAMETER
+2021-10-29 06:24:04.268437: I tensorflow/core/profiler/internal/gpu/device_tracer.cc:88]  GpuTracer has collected 0 callback api events and 0 activity events.

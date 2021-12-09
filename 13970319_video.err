@@ -1,0 +1,9 @@
+Traceback (most recent call last):
+  File "neural_main.py", line 1, in <module>
+    from train import *
+  File "/project2/nicho/weiliang/videoNet/code/train.py", line 5, in <module>
+    from models import ResearchModels
+  File "/project2/nicho/weiliang/videoNet/code/models.py", line 15
+    def __init__(self, nb_classes, model, seq_length, image_shape,
+    ^
+SyntaxError: import * only allowed at module level

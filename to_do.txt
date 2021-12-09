@@ -1,0 +1,31 @@
+model changed,
+need to figure out how to read in files
+change all other settings
+maybe refer to other example?
+(minimal ones?)
+
+to demean?/z score? done
+pool datasets?  done
+change size, pooling?
+tensorboard (to study more,maybe rename to get filter working?
+
+
+)
+
+elongated time
+
+8dir:
+90%+for train, ~70% for val  
+
+2 dir:
+1215
+train_accuracy: 0.9823 - val_loss: 0.1017 - val_accuracy: 0.9744
+1221
+loss: 0.0424 - accuracy: 0.9948 - val_loss: 0.1865 - val_accuracy: 0.9286
+
+1130
+loss: 0.0491 - accuracy: 0.9914 - val_loss: 0.4109 - val_accuracy: 0.8544
+no space with double para
+loss: 0.0180 - accuracy: 1.0000 - val_loss: 0.4317 - val_accuracy: 0.8544
+no space with slightly less para
+loss: 0.1095 - accuracy: 0.9857 - val_loss: 0.5406 - val_accuracy: 0.8350
