@@ -108,8 +108,8 @@ def readAndDivideData(sessions,monkey,array,seed,target_to_predict,
         iSliceTimeToPredict_start_idx=np.where(sliceTimes==sliceTimesToPredict_start_ms)[0][0]
         iSliceTimeToPredict_end_idx=np.where(sliceTimes==sliceTimesToPredict_end_ms)[0][0]
         #31*#trial
-        vel_final=np.vstack((np.flatten(xVel_yVel_slices['xv_profile'][iSliceTimeToPredict_start_idx:iSliceTimeToPredict_end_idx,:].transpose),
-            np.flatten(xVel_yVel_slices['yv_profile'][iSliceTimeToPredict_start_idx:iSliceTimeToPredict_end_idx,:].transpose)))
+        vel_final=np.vstack(((xVel_yVel_slices['xv_profile'][iSliceTimeToPredict_start_idx:iSliceTimeToPredict_end_idx,:].T.flatten()),
+            (xVel_yVel_slices['yv_profile'][iSliceTimeToPredict_start_idx:iSliceTimeToPredict_end_idx,:].T.flatten())))
         #check dim (2*_)   _ time 1 ~last in trial 1, time 1 ~last in trial 2,...    
         lfp_matrix_for_velPrediction=[]
         for iTrial in np.arange(lfp_matrix_trimmed.shape[0]):
@@ -121,7 +121,7 @@ def readAndDivideData(sessions,monkey,array,seed,target_to_predict,
                 lfp_matrix_for_velPrediction.append(np.squeeze(lfp_matrix_trimmed[iTrial,lfp_idx_start:lfp_idx_end,:]))
 
         lfp_matrix_for_velPrediction_array=np.asarray(lfp_matrix_for_velPrediction)
-        print(lfp_matrix_for_velPrediction_array.shape())
+        print(lfp_matrix_for_velPrediction_array.shape)
         lfp_matrix_trimmed=lfp_matrix_for_velPrediction_array
 
 
