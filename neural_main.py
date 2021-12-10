@@ -21,7 +21,7 @@ saved_model = None  # None or weights file
 class_limit = None  # int, can be 1-101 or None
 
 load_to_memory = True#False  # pre-load the sequences into memory
-batch_size = 16#32
+batch_size = 16#64#16#32#speed no difference?
 nb_epoch = 500#1000
 lfp_start_ms=-700
 lfp_end_ms=1400#1400#1000

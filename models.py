@@ -97,8 +97,8 @@ class ResearchModels():
             self.model.compile(loss='categorical_crossentropy', optimizer=optimizer,
                                metrics=metrics)
         else:
-            metrics = ['MeanAbsoluteError','MeanSquaredError']
-            self.model.compile(loss='MeanAbsoluteError', optimizer=optimizer,
+            metrics = ['MeanSquaredError','MeanAbsoluteError']
+            self.model.compile(loss='mean_squared_error', optimizer=optimizer,
                                metrics=metrics)#try MAE primary for now
 
 
@@ -292,15 +292,15 @@ class ResearchModels():
         model.add(MaxPooling3D(pool_size=(10, 1, 1), strides=(5, 1, 1)))
         model.add(Conv3D(32, (2,2,2), activation='relu'))
         model.add(Conv3D(64, (3,3,3), activation='relu'))
-        model.add(MaxPooling3D(pool_size=(4, 1, 1), strides=(4, 1, 1)))
+        #model.add(MaxPooling3D(pool_size=(4, 1, 1), strides=(4, 1, 1)))
         # model.add(Conv3D(256, (2,2,2), activation='relu'))
         # model.add(Conv3D(256, (2,2,2), activation='relu'))
         # model.add(MaxPooling3D(pool_size=(1, 2, 2), strides=(1, 2, 2)))
 
         model.add(Flatten())
-        model.add(Dense(256))
+        model.add(Dense(256, activation='relu'))#used to be none, everything below
         model.add(Dropout(0.5))
-        model.add(Dense(256))
+        model.add(Dense(256, activation='relu'))
         model.add(Dropout(0.5))
         model.add(Dense(2))
 
