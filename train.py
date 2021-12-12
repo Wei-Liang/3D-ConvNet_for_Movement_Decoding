@@ -7,6 +7,7 @@ from models import ResearchModels
 from video_supportive import *
 import time
 import os.path
+import os
 
 def train(data_type, seq_length, model, nClasses, sessions, 
     monkey, array, seed, target_to_predict,
@@ -14,7 +15,7 @@ def train(data_type, seq_length, model, nClasses, sessions,
     class_limit=None, image_shape=None,
     load_to_memory=False, batch_size=32, nb_epoch=100):
 
-    # Helper: Save the model.
+    # Helper: Save the model. For generator at the moment
     checkpointer = ModelCheckpoint(
         filepath=os.path.join('..','data', 'checkpoints', model + '-' + data_type + \
             '.{epoch:03d}-{val_loss:.3f}.hdf5'),
@@ -86,6 +87,17 @@ def train(data_type, seq_length, model, nClasses, sessions,
             verbose=1,
             callbacks=[tb, early_stopper, csv_logger],
             epochs=nb_epoch)
+        modelPath=os.path.join('..','data', 'models', monkey+
+            sessions[0]+array+'bch'+str(batch_size)+
+            model + '-' + 'training-' + 
+            str(timestamp))
+        os.mkdir(modelPath)
+        rm.model.save(modelPath)
+        print('onTestSet:')
+        print(rm.model.metrics_names)
+        scores= model.evaluate(X_test, y_test, verbose=2)
+        print(scores)
+
     else:
         # Use fit generator.
         rm.model.fit_generator(
