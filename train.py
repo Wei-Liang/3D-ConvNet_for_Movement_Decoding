@@ -87,16 +87,31 @@ def train(data_type, seq_length, model, nClasses, sessions,
             verbose=1,
             callbacks=[tb, early_stopper, csv_logger],
             epochs=nb_epoch)
+
+        #save model
         modelPath=os.path.join('..','data', 'models', monkey+
             sessions[0]+array+'bch'+str(batch_size)+
             model + '-' + 'training-' + 
             str(timestamp))
         os.mkdir(modelPath)
         rm.model.save(modelPath)
+
+        #loss and metrics on test set
         print('onTestSet:')
         print(rm.model.metrics_names)
-        scores= model.evaluate(X_test, y_test, verbose=2)
+        scores= rm.model.evaluate(X_test, y_test, verbose=2)
         print(scores)
+
+        #R2s for train, val and test
+        y_predicted_train=rm.model.predict(X_train)
+        y_predicted_val=rm.model.predict(X_val)
+        y_predicted_test=rm.model.predict(X_test)
+        r2_from_xv_yv_train=get_compositeR2_from_xv_yv(y_train,y_predicted_train)
+        r2_from_xv_yv_val=get_compositeR2_from_xv_yv(y_val,y_predicted_val)
+        r2_from_xv_yv_test=get_compositeR2_from_xv_yv(y_test,y_predicted_test)
+        print('R2 train '+ str(r2_from_xv_yv_train) + ', val ' + 
+            str(r2_from_xv_yv_val) + ', test '+str(r2_from_xv_yv_test))
+
 
     else:
         # Use fit generator.

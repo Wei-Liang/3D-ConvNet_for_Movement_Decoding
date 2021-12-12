@@ -194,6 +194,19 @@ def convertLabelToOneHot(tps):
     tps_oneHot=to_categorical(tps_in_catIndex, num_classes=num_classes)
     return tps_oneHot
 
+
+
+def get_compositeR2_from_xv_yv(y_real,y_predicted):
+    #samples*#vars
+    print(y_real.shape)
+    print(y_predicted.shape)
+    numerator=np.sum((y_real-y_predicted)**2,axis=(0,1))
+    denominator=np.sum((y_real-np.mean(y_real,axis=0))**2,axis=(0,1))
+    r2=1-numerator/denominator
+    return r2
+
+
+
 def loadKinSlices(dataFolder,monkey,session,fileIdentifier):
     filepath = dataFolder+monkey+session+fileIdentifier+'.mat'
     kin_slices_wUseless=sio.loadmat(filepath)
