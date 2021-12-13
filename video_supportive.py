@@ -6,7 +6,8 @@ from tensorflow.keras.utils import to_categorical
 
 def readAndDivideData(sessions,monkey,array,seed,target_to_predict,
     lfp_for_denoising_start_ms,lfp_for_denoising_end_ms,
-    sliceTimesToPredict_start_ms,sliceTimesToPredict_end_ms,lfp_ms_for_vel):
+    sliceTimesToPredict_start_ms,sliceTimesToPredict_end_ms,lfp_ms_for_vel,
+    scrambleLocations,scrambleSeed):
     dataFolder='../data_neural/'
     percent_outlier_exclude=0
     ds_ratio=1
@@ -138,6 +139,21 @@ def readAndDivideData(sessions,monkey,array,seed,target_to_predict,
     pin_map_current=pin_map_current-1
     nRows=pin_map_current.shape[0] #16
     nCols=pin_map_current.shape[1] #8
+
+
+
+    #shuffle map if needed
+    if scrambleLocations==1:
+        rng = np.random.default_rng(scrambleSeed)
+        if array=='lower':
+            toShuffle=pin_map_current[8:16,:]
+            pin_map_current[8:16,:]=rng.permutation(toShuffle.flatten).reshape(toShuffle.shape)
+        elif array=='upper':
+            toShuffle=pin_map_current[0:8,:]
+            pin_map_current[0:8,:]=rng.permutation(toShuffle.flatten).reshape(toShuffle.shape)
+        elif array=='dual':
+            toShuffle=pin_map_current
+            pin_map_current=rng.permutation(toShuffle.flatten).reshape(toShuffle.shape)
 
     #trials*time*electrodes->trials*time*nRows*nCols*1
     lfp_matrix_trimmed_reshaped=lfp_matrix_trimmed.reshape((

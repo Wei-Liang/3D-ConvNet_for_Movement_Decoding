@@ -1,5 +1,5 @@
 from train import *
-monkey='Bx'
+monkey='Ls'#'Bx'
 
 if monkey=='Bx':
     allSessions=np.asarray(['171215','171220','171221',\
@@ -11,7 +11,8 @@ elif monkey=='Ls':
     allSessions_numDir=np.asarray([8,8,8])
 
 array='lower'#'lower'#upper#dual
-
+scrambleLocations=1
+scrambleSeed=15
 
 # it can be only 1 session as well, in a list []
 target_to_predict='vel'#'tp'
@@ -29,6 +30,9 @@ lfp_end_ms=1400#1400#1000
 vel_start_ms=0
 vel_end_ms=300
 lfp_ms_for_vel=300#preceding ms until vel
+
+
+
 
 if target_to_predict=='tp':
     seq_length = (lfp_end_ms-lfp_start_ms)*2+1
@@ -49,6 +53,7 @@ for nClasses in np.asarray([8]):
     #sessions=['180323']
 
     train(data_type, seq_length, model, nClasses, sessions, monkey, array, seed, target_to_predict,
-        lfp_start_ms,lfp_end_ms,vel_start_ms,vel_end_ms,lfp_ms_for_vel,saved_model=saved_model,
+        lfp_start_ms,lfp_end_ms,vel_start_ms,vel_end_ms,lfp_ms_for_vel,scrambleLocations,scrambleSeed,
+        saved_model=saved_model,
         class_limit=class_limit, image_shape=image_shape,
         load_to_memory=load_to_memory, batch_size=batch_size, nb_epoch=nb_epoch)

@@ -11,7 +11,9 @@ import os
 
 def train(data_type, seq_length, model, nClasses, sessions, 
     monkey, array, seed, target_to_predict,
-    lfp_start_ms,lfp_end_ms,vel_start_ms,vel_end_ms,lfp_ms_for_vel,saved_model=None,
+    lfp_start_ms,lfp_end_ms,vel_start_ms,vel_end_ms,lfp_ms_for_vel,
+    scrambleLocations,scrambleSeed,
+    saved_model=None,
     class_limit=None, image_shape=None,
     load_to_memory=False, batch_size=32, nb_epoch=100):
 
@@ -31,15 +33,17 @@ def train(data_type, seq_length, model, nClasses, sessions,
     # Helper: Save results.
     timestamp = time.time()
     if len(sessions)>1:
-        csv_logger = CSVLogger(os.path.join('..','data', 'logs', monkey+
+        csv_logger_path = os.path.join('..','data', 'logs', monkey+
             str(nClasses)+'dir'+array+'bch'+str(batch_size)+
-            model + '-' + 'training-' + 
-            str(timestamp) + '.log'))
+            model + '-' + 'training-' )
     else:
-        csv_logger = CSVLogger(os.path.join('..','data', 'logs', monkey+
+        csv_logger_path = os.path.join('..','data', 'logs', monkey+
             sessions[0]+array+'bch'+str(batch_size)+
-            model + '-' + 'training-' + 
-            str(timestamp) + '.log'))
+            model + '-' + 'training-')
+    if scrambleLocations==1:
+        csv_logger_path=csv_logger_path+'scramble'+str(scrambledSeed)
+
+    csv_logger=CSVLogger(csv_logger_path+'_'+str(timestamp) + '.log')
 
     # # Get the data and process it.
     # if image_shape is None:
@@ -62,7 +66,8 @@ def train(data_type, seq_length, model, nClasses, sessions,
         # Get data.
         X_train,X_val,X_test,y_train,y_val,y_test=readAndDivideData(
             sessions,monkey,array,seed,target_to_predict,
-            lfp_start_ms,lfp_end_ms,vel_start_ms,vel_end_ms,lfp_ms_for_vel,)
+            lfp_start_ms,lfp_end_ms,vel_start_ms,vel_end_ms,lfp_ms_for_vel,
+            scrambleLocations,scrambleSeed)
         print(X_train.shape)
         print(y_train.shape)
         # X, y = data.get_all_sequences_in_memory('train', data_type)
@@ -91,8 +96,10 @@ def train(data_type, seq_length, model, nClasses, sessions,
         #save model
         modelPath=os.path.join('..','data', 'models', monkey+
             sessions[0]+array+'bch'+str(batch_size)+
-            model + '-' + 'training-' + 
-            str(timestamp))
+            model + '-' + 'training-')
+        if scrambleLocations==1:
+            modelPath=modelPath+'scramble'+str(scrambledSeed)
+        modelPath=modelPath+str(timestamp)
         os.mkdir(modelPath)
         rm.model.save(modelPath)
 
