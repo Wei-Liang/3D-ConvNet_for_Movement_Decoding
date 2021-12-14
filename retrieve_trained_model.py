@@ -1,3 +1,18 @@
+import h5py
+from sklearn.model_selection import train_test_split
+import numpy as np
+import scipy.io as sio
+from tensorflow.keras.utils import to_categorical
+
+from tensorflow.keras.callbacks import TensorBoard, ModelCheckpoint, EarlyStopping, CSVLogger
+from models import ResearchModels
+#from data import DataSet
+from video_supportive import *
+import time
+import os.path
+import os
+import tensorflow as tf
+
 from train import *
 monkey='Bx'#'Bx'
 
@@ -49,24 +64,14 @@ else:
 seed=8
 
 nClasses=8
+scrambleLocations=0
+scrambleSeed=0
 
-#for nClasses in np.asarray([8]):
-for scrambleLocations in np.arange(2):
-    sessions=allSessions[allSessions_numDir==nClasses]
-    if scrambleLocations==1:
-        for scrambleSeed in np.arange(5):
-            print('scramble with seed:'+str(scrambleSeed))
-            train(data_type, seq_length, model, nClasses, sessions, monkey, array, seed, target_to_predict,
-                lfp_start_ms,lfp_end_ms,vel_start_ms,vel_end_ms,lfp_ms_for_vel,scrambleLocations,scrambleSeed,
-                saved_model=saved_model,
-                class_limit=class_limit, image_shape=image_shape,
-                load_to_memory=load_to_memory, batch_size=batch_size, nb_epoch=nb_epoch)
-    else:
-        scrambleSeed=0#doesnt matter, no use
-        print('original location')
-        train(data_type, seq_length, model, nClasses, sessions, monkey, array, seed, target_to_predict,
-                lfp_start_ms,lfp_end_ms,vel_start_ms,vel_end_ms,lfp_ms_for_vel,scrambleLocations,scrambleSeed,
-                saved_model=saved_model,
-                class_limit=class_limit, image_shape=image_shape,
-                load_to_memory=load_to_memory, batch_size=batch_size, nb_epoch=nb_epoch)
 
+new_model = tf.keras.models.load_model('../data/models/Bx180323lowerbch16conv_3d_cont-training-_1639428502.3214514')
+
+sessions=allSessions[allSessions_numDir==nClasses]
+X_train,X_val,X_test,y_train,y_val,y_test=readAndDivideData(
+    sessions,monkey,array,seed,target_to_predict,
+    lfp_start_ms,lfp_end_ms,vel_start_ms,vel_end_ms,lfp_ms_for_vel,
+    scrambleLocations,scrambleSeed)

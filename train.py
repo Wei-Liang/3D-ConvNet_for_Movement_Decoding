@@ -41,7 +41,7 @@ def train(data_type, seq_length, model, nClasses, sessions,
             sessions[0]+array+'bch'+str(batch_size)+
             model + '-' + 'training-')
     if scrambleLocations==1:
-        csv_logger_path=csv_logger_path+'scramble'+str(scrambledSeed)
+        csv_logger_path=csv_logger_path+'scramble'+str(scrambleSeed)
 
     csv_logger=CSVLogger(csv_logger_path+'_'+str(timestamp) + '.log')
 
@@ -94,12 +94,17 @@ def train(data_type, seq_length, model, nClasses, sessions,
             epochs=nb_epoch)
 
         #save model
-        modelPath=os.path.join('..','data', 'models', monkey+
-            sessions[0]+array+'bch'+str(batch_size)+
-            model + '-' + 'training-')
+        if len(sessions)>1:
+            modelPath=os.path.join('..','data', 'models', monkey+
+                str(nClasses)+'dir'+array+'bch'+str(batch_size)+
+                model + '-' + 'training-')
+        else:
+            modelPath=os.path.join('..','data', 'models', monkey+
+                sessions[0]+array+'bch'+str(batch_size)+
+                model + '-' + 'training-')
         if scrambleLocations==1:
-            modelPath=modelPath+'scramble'+str(scrambledSeed)
-        modelPath=modelPath+str(timestamp)
+            modelPath=modelPath+'scramble'+str(scrambleSeed)
+        modelPath=modelPath+'_'+str(timestamp)
         os.mkdir(modelPath)
         rm.model.save(modelPath)
 

@@ -147,13 +147,13 @@ def readAndDivideData(sessions,monkey,array,seed,target_to_predict,
         rng = np.random.default_rng(scrambleSeed)
         if array=='lower':
             toShuffle=pin_map_current[8:16,:]
-            pin_map_current[8:16,:]=rng.permutation(toShuffle.flatten).reshape(toShuffle.shape)
+            pin_map_current[8:16,:]=rng.permutation(toShuffle.flatten()).reshape(toShuffle.shape)
         elif array=='upper':
             toShuffle=pin_map_current[0:8,:]
-            pin_map_current[0:8,:]=rng.permutation(toShuffle.flatten).reshape(toShuffle.shape)
+            pin_map_current[0:8,:]=rng.permutation(toShuffle.flatten()).reshape(toShuffle.shape)
         elif array=='dual':
             toShuffle=pin_map_current
-            pin_map_current=rng.permutation(toShuffle.flatten).reshape(toShuffle.shape)
+            pin_map_current=rng.permutation(toShuffle.flatten()).reshape(toShuffle.shape)
 
     #trials*time*electrodes->trials*time*nRows*nCols*1
     lfp_matrix_trimmed_reshaped=lfp_matrix_trimmed.reshape((
