@@ -1,6 +1,6 @@
 3D Convolution Networks for Movement Decoding
 
-I used neural activity across many electrodes throughout the cortical sheet unfolding over time to predict movement directions (categorical variable) or movement speed (continuous variable). This is in the same spirit of using videos to predict categories. In the process, I compared among many architectures of networks with different combinations 3D or 2D convolutions, in combination of recurrent networks, with/without dropouts. Additionally, I chekced whether having the correct spatial relationship among electrodes are crucial for decoding. All implementations were executed using GPU clusters of HPC on Uchicago Midway. Next step is to extract the spatio-temporal features important for determining movements using deConvNet.
+I used neural activity across many electrodes throughout the cortical sheet unfolding over time to predict movement directions (categorical variable) or movement speed (continuous variable). This is in the same spirit of using video clips to label content. In the process, I compared among many architectures of networks with different combinations 3D or 2D convolutions, in combination of recurrent networks, with/without dropouts. Additionally, I chekced whether having the correct spatial relationship among electrodes are crucial for decoding. All implementations were executed using GPU clusters of HPC on Uchicago Midway. Next step is to extract the spatio-temporal features important for determining movements using deConvNet.
 
 
 c3d network: 
