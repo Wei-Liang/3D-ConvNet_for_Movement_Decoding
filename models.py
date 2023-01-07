@@ -68,6 +68,11 @@ class ResearchModels():
             self.input_shape = (seq_length, 
                 image_shape[0], image_shape[1], image_shape[2])
             self.model = self.conv_3d_cont()
+        elif model == 'conv_3d_cont_weak':
+            print("Loading conv_3d_cont_weak")
+            self.input_shape = (seq_length, 
+                image_shape[0], image_shape[1], image_shape[2])
+            self.model = self.conv_3d_cont_weak()
         elif model == 'localConn':
             print("Loading localConn")
             self.input_shape = (seq_length, 
@@ -306,6 +311,36 @@ class ResearchModels():
 
         return model
 
+
+    def conv_3d_cont_weak(self):
+        """
+        Build a 3D convolutional network, based loosely on C3D.
+            https://arxiv.org/pdf/1412.0767.pdf
+            #changed for neural application
+        """
+        # Model.
+        model = Sequential()
+        model.add(Conv3D(
+            8, (10,1,1), activation='relu', input_shape=self.input_shape
+        ))
+        model.add(MaxPooling3D(pool_size=(10, 1, 1), strides=(10, 1, 1)))
+        model.add(Conv3D(16, (10,2,2), activation='relu'))
+        model.add(MaxPooling3D(pool_size=(10, 1, 1), strides=(5, 1, 1)))
+        model.add(Conv3D(32, (2,2,2), activation='relu'))
+        model.add(Conv3D(32, (3,3,3), activation='relu'))
+        #model.add(MaxPooling3D(pool_size=(4, 1, 1), strides=(4, 1, 1)))
+        # model.add(Conv3D(256, (2,2,2), activation='relu'))
+        # model.add(Conv3D(256, (2,2,2), activation='relu'))
+        # model.add(MaxPooling3D(pool_size=(1, 2, 2), strides=(1, 2, 2)))
+
+        model.add(Flatten())
+        model.add(Dense(256, activation='relu'))#used to be none, everything below
+        # model.add(Dropout(0.5))
+        # model.add(Dense(256, activation='relu'))
+        # model.add(Dropout(0.5))
+        model.add(Dense(2))
+
+        return model
 
 
     def conv_3d_2by2(self):

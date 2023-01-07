@@ -14,7 +14,7 @@ import os
 import tensorflow as tf
 
 from train import *
-monkey='Bx'#'Bx'
+monkey='Ls'#'Bx'
 
 if monkey=='Bx':
     allSessions=np.asarray(['171215','171220','171221',\
@@ -61,17 +61,27 @@ if array=='dual':
     image_shape = (16, 8, 1)
 else:
     image_shape = (8, 8, 1)
+    
 seed=8
 
 nClasses=8
-scrambleLocations=0
-scrambleSeed=0
+scrambleLocations=1
+scrambleSeed=1
 
 
-new_model = tf.keras.models.load_model('../data/models/Bx180323lowerbch16conv_3d_cont-training-_1639428502.3214514')
+model = tf.keras.models.load_model('../data/models/Ls150930lowerbch16conv_3d_cont-training-scramble1_1639430398.4899197')
 
 sessions=allSessions[allSessions_numDir==nClasses]
 X_train,X_val,X_test,y_train,y_val,y_test=readAndDivideData(
     sessions,monkey,array,seed,target_to_predict,
     lfp_start_ms,lfp_end_ms,vel_start_ms,vel_end_ms,lfp_ms_for_vel,
     scrambleLocations,scrambleSeed)
+
+y_predicted_train=model.predict(X_train)
+y_predicted_val=model.predict(X_val)
+y_predicted_test=model.predict(X_test)
+r2_from_xv_yv_train=get_compositeR2_from_xv_yv(y_train,y_predicted_train)
+r2_from_xv_yv_val=get_compositeR2_from_xv_yv(y_val,y_predicted_val)
+r2_from_xv_yv_test=get_compositeR2_from_xv_yv(y_test,y_predicted_test)
+print('R2 train '+ str(r2_from_xv_yv_train) + ', val ' + 
+    str(r2_from_xv_yv_val) + ', test '+str(r2_from_xv_yv_test))

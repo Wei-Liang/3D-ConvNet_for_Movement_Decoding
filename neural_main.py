@@ -1,5 +1,5 @@
 from train import *
-monkey='Bx'#'Bx'
+monkey='Ls'#'Bx'
 
 if monkey=='Bx':
     allSessions=np.asarray(['171215','171220','171221',\
@@ -16,7 +16,7 @@ array='lower'#'lower'#upper#dual
 
 # it can be only 1 session as well, in a list []
 target_to_predict='vel'#'tp'
-model = 'conv_3d_cont'
+model = 'conv_3d_cont_weak'
 #model = 'conv_3d_2by2'#'conv_3d_noSpace'#'conv_3d'#'lstm'
 saved_model = None  # None or weights file
 class_limit = None  # int, can be 1-101 or None

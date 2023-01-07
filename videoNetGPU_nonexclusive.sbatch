@@ -7,7 +7,7 @@
 #SBATCH --nodes=1
 ##SBATCH --exclusive
 #SBATCH --time=24:00:00
-#SBATCH --mem=32000
+#SBATCH --mem=50000
 
 module load python
 ##source activate tf-1.13.1-p368
