@@ -8,4 +8,4 @@ Tran, D., Bourdev, L., Fergus, R., Torresani, L., & Paluri, M. (2015). Learning 
 https://openaccess.thecvf.com/content_iccv_2015/papers/Tran_Learning_Spatiotemporal_Features_ICCV_2015_paper.pdf
 
 
-Implementations are inspired amd adapted from https://github.com/harvitronix/five-video-classification-methods
+Implementations are inspired and adapted from https://github.com/harvitronix/five-video-classification-methods
